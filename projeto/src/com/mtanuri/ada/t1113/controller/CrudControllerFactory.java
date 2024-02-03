@@ -1,41 +1,24 @@
 package com.mtanuri.ada.t1113.controller;
 
-import com.mtanuri.ada.t1113.model.Filme;
-import com.mtanuri.ada.t1113.model.Ator;
-import com.mtanuri.ada.t1113.model.Diretor;
 import com.mtanuri.ada.t1113.repository.CrudRepository;
+import com.mtanuri.ada.t1113.repository.impl.CrudRepositoryFactory;
 
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CrudControllerFactory {
 
-    private static CrudController<Filme> filmeCrudController;
+    private static final Map<Class<?>, CrudController<?>> controllers = new HashMap<>();
 
-    private static CrudController<Ator> atorCrudController;
+    @SuppressWarnings("unchecked")
+    public static <T> CrudController<T> getInstance(Class<T> type) {
 
-    private static CrudController<Diretor> diretorCrudController;
-
-    public static CrudController<Filme> getFilmeController(CrudRepository<Filme> filmesRepository) {
-        if (Objects.isNull(filmeCrudController)) {
-            filmeCrudController = new CrudController<>(filmesRepository);
+        if (!controllers.containsKey(type)) {
+            CrudRepository<T> repository = CrudRepositoryFactory.getInstance(type);
+            CrudController<T> controller = new CrudController<>(repository);
+            controllers.put(type, controller);
         }
-        return filmeCrudController;
-    }
-
-
-    public static CrudController<Ator> getAtorController(CrudRepository<Ator> atorRepository) {
-        if (Objects.isNull(atorCrudController)) {
-            atorCrudController = new CrudController<>(atorRepository);
-        }
-        return atorCrudController;
-    }
-
-
-    public static CrudController<Diretor> getDiretorController(CrudRepository<Diretor> diretorRepository) {
-        if (Objects.isNull(atorCrudController)) {
-            diretorCrudController = new CrudController<>(diretorRepository);
-        }
-        return diretorCrudController;
+        return (CrudController<T>) controllers.get(type);
     }
 
 }
