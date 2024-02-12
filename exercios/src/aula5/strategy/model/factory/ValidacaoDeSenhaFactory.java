@@ -1,4 +1,4 @@
-package aula5.strategy.factory;
+package aula5.strategy.model.factory;
 
 import aula5.strategy.exception.LocalizadorDeValidadoresException;
 import aula5.strategy.model.ValidadorDeSenha;

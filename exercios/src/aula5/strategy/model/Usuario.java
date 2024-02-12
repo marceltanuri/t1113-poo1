@@ -1,7 +1,7 @@
 package aula5.strategy.model;
 
 import aula5.strategy.exception.SenhaInvalidaException;
-import aula5.strategy.factory.ValidacaoDeSenhaFactory;
+import aula5.strategy.model.factory.ValidacaoDeSenhaFactory;
 
 import java.util.ArrayList;
 import java.util.List;
