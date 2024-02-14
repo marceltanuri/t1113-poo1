@@ -1,7 +1,8 @@
-package aula5.strategy.model;
+package aula5.strategy.model.user;
 
 import aula5.strategy.exception.SenhaInvalidaException;
-import aula5.strategy.model.factory.ValidacaoDeSenhaFactory;
+import aula5.strategy.model.password.validador.factory.SenhaValidatorFactory;
+import aula5.strategy.model.password.validador.SenhaValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +11,20 @@ public class Usuario {
 
     private static final int SENHAS_ALTERIORES_OBRIGATORIAS = 3;
 
-    private String senhaAtual;
-
-    private List<String> senhasAnteriores = new ArrayList<>();
-
-    public Usuario (String senha) throws SenhaInvalidaException {
-        validarSenha(senha);
-        this.senhaAtual = senha;
+    protected Usuario() {
     }
 
+    public static UsuarioBuilder builder(){
+        return new UsuarioBuilder();
+    }
 
+    protected String senhaAtual;
+
+    protected String nome;
+
+    protected String dataNascimento;
+
+    private List<String> senhasAnteriores = new ArrayList<>();
 
     public void alteraSenha(String senhaAtual, String novaSenha) throws SenhaInvalidaException {
 
@@ -37,10 +42,10 @@ public class Usuario {
     }
 
     private void validarSenha(String novaSenha) throws SenhaInvalidaException {
-        ValidacaoDeSenhaFactory factory = ValidacaoDeSenhaFactory.getInstance("app.properties");
-        List<ValidadorDeSenha> strategies = factory.getImplementations();
+        SenhaValidatorFactory factory = SenhaValidatorFactory.getInstance();
+        List<SenhaValidator> strategies = factory.getImplementations();
 
-        for (ValidadorDeSenha strategy : strategies) {
+        for (SenhaValidator strategy : strategies) {
             strategy.validar(this, novaSenha);
         }
     }

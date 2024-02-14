@@ -1,12 +1,12 @@
-package aula5.strategy.model.impl;
+package aula5.strategy.model.password.validador.impl;
 
 import aula5.strategy.exception.SenhaInvalidaException;
-import aula5.strategy.model.Usuario;
-import aula5.strategy.model.ValidadorDeSenha;
+import aula5.strategy.model.user.Usuario;
+import aula5.strategy.model.password.validador.SenhaValidator;
 
 import java.util.List;
 
-public class ValidarSenhaNaoRepetida implements ValidadorDeSenha {
+public class SenhaNaoRepetidaValidator implements SenhaValidator {
 
     private static final int TOTAL_DE_SENHAS_ALTERIORES_PARA_VALIDAR = 3;
 

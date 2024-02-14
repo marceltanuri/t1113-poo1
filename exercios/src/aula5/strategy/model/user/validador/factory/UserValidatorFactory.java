@@ -1,7 +1,8 @@
-package aula5.strategy.model.factory;
+package aula5.strategy.model.user.validador.factory;
 
 import aula5.strategy.exception.LocalizadorDeValidadoresException;
-import aula5.strategy.model.ValidadorDeSenha;
+import aula5.strategy.model.user.validador.UserValidator;
+import aula5.strategy.util.Constants;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,13 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class ValidacaoDeSenhaFactory {
-    private static ValidacaoDeSenhaFactory instance;
+public class UserValidatorFactory {
+    private static UserValidatorFactory instance;
     private final Properties properties;
 
-    private ValidacaoDeSenhaFactory(String propertiesFile) throws LocalizadorDeValidadoresException {
+    private UserValidatorFactory() throws LocalizadorDeValidadoresException {
         properties = new Properties();
-        try (InputStream input = ValidacaoDeSenhaFactory.class.getResourceAsStream("/aula5/strategy/"+propertiesFile)) {
+        try (InputStream input = UserValidatorFactory.class.getResourceAsStream(Constants.ARQUIVO_PROPRIEDADES_PATH)) {
             if (input == null) {
                 throw new LocalizadorDeValidadoresException("Arquivo de propriedades não encontrado");
             }
@@ -28,17 +29,17 @@ public class ValidacaoDeSenhaFactory {
     }
 
 
-    public static synchronized ValidacaoDeSenhaFactory getInstance(String propertiesFileName) throws LocalizadorDeValidadoresException {
+    public static synchronized UserValidatorFactory getInstance() throws LocalizadorDeValidadoresException {
         if (instance == null) {
-            instance = new ValidacaoDeSenhaFactory(propertiesFileName);
+            instance = new UserValidatorFactory();
         }
         return instance;
     }
 
-    public List<ValidadorDeSenha> getImplementations() throws LocalizadorDeValidadoresException {
-        List<ValidadorDeSenha> implementations = new ArrayList<>();
+    public List<UserValidator> getImplementations() throws LocalizadorDeValidadoresException {
+        List<UserValidator> implementations = new ArrayList<>();
 
-        String classNamesProperty = properties.getProperty("usuario.senha.validadores");
+        String classNamesProperty = properties.getProperty("usuario.validadores");
         if (classNamesProperty != null && !classNamesProperty.isEmpty()) {
             String[] classNames = classNamesProperty.split(",");
             for (String className : classNames) {
@@ -46,11 +47,11 @@ public class ValidacaoDeSenhaFactory {
                     Class<?> clazz = Class.forName(className.trim());
                     Constructor<?> constructor = clazz.getDeclaredConstructor();
                     Object obj = constructor.newInstance();
-                    if (obj instanceof ValidadorDeSenha) {
-                        implementations.add((ValidadorDeSenha) obj);
+                    if (obj instanceof UserValidator) {
+                        implementations.add((UserValidator) obj);
                     }
                 } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-                    throw new LocalizadorDeValidadoresException("Erro ao instanciar validador de senha", e);
+                    throw new LocalizadorDeValidadoresException("Erro ao instanciar validador de usuario", e);
                 }
             }
         }

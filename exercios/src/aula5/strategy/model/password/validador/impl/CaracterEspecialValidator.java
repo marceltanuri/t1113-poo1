@@ -1,10 +1,10 @@
-package aula5.strategy.model.impl;
+package aula5.strategy.model.password.validador.impl;
 
 import aula5.strategy.exception.SenhaInvalidaException;
-import aula5.strategy.model.Usuario;
-import aula5.strategy.model.ValidadorDeSenha;
+import aula5.strategy.model.user.Usuario;
+import aula5.strategy.model.password.validador.SenhaValidator;
 
-public class CaracterEspecialValidador implements ValidadorDeSenha {
+public class CaracterEspecialValidator implements SenhaValidator {
     private static final String CARACTERES_ESPECIAIS = "!@#$%^&*()-+";
 
     @Override
