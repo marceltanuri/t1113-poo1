@@ -1,7 +1,10 @@
-package com.mtanuri.t1113.model;
+package com.mtanuri.t1113.model.filme;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import com.mtanuri.t1113.model.ator.Ator;
+import com.mtanuri.t1113.model.diretor.Diretor;
 
 public class Filme {
 
@@ -14,7 +17,23 @@ public class Filme {
     private List<Ator> atores;
 
     private List<Diretor> diretores;
+    
+    @Override
+    public String toString() {
+        return "Filme{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                '}';
+    }
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+    
 	public String getNome() {
 		return nome;
 	}
@@ -61,14 +80,6 @@ public class Filme {
 
 	public void setDiretores(List<Diretor> diretores) {
 		this.diretores = diretores;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 }

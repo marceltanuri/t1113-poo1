@@ -1,18 +1,18 @@
-package com.mtanuri.t1113.impl;
+package com.mtanuri.t1113.repository.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.mtanuri.t1113.model.Filme;
+import com.mtanuri.t1113.model.filme.Filme;
 import com.mtanuri.t1113.repository.FilmesRepository;
 
-public class FilmesRepositoryImpl implements FilmesRepository {
+public class FilmesRepositoryInMemoryImpl implements FilmesRepository {
 
-	private static List<Filme> filmes = new ArrayList<Filme>();
+	private List<Filme> filmes = new ArrayList<Filme>();
     private static int contador = 0;
     
-    private FilmesRepositoryImpl(){
+    public FilmesRepositoryInMemoryImpl(){
 
     }
 	

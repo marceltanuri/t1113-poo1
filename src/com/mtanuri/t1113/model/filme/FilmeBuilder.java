@@ -1,7 +1,10 @@
-package com.mtanuri.t1113.model;
+package com.mtanuri.t1113.model.filme;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import com.mtanuri.t1113.model.ator.Ator;
+import com.mtanuri.t1113.model.diretor.Diretor;
 
 public class FilmeBuilder {
 
@@ -12,12 +15,12 @@ public class FilmeBuilder {
 		return this;
 	}
 
-	public FilmeBuilder comId(LocalDate dataLancamento){
+	public FilmeBuilder comDataLancamento(LocalDate dataLancamento){
 		filme.setDataLancamento(dataLancamento);
 		return this;
 	}
 
-	public FilmeBuilder comDuracao(double orcamento){
+	public FilmeBuilder comOrcamento(double orcamento){
 		filme.setOrcamento(orcamento);
 		return this;
 	}

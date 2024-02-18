@@ -2,7 +2,7 @@ package com.mtanuri.t1113.repository;
 
 import java.util.List;
 
-import com.mtanuri.t1113.model.Filme;
+import com.mtanuri.t1113.model.filme.Filme;
 
 public interface FilmesRepository {
 

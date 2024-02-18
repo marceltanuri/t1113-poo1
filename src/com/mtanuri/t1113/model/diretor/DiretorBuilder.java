@@ -1,7 +1,9 @@
-package com.mtanuri.t1113.model;
+package com.mtanuri.t1113.model.diretor;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import com.mtanuri.t1113.model.filme.Filme;
 
 public class DiretorBuilder {
 
