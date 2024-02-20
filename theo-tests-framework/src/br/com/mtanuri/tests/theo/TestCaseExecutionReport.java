@@ -1,5 +1,3 @@
-package aula5.strategy.tests.core;
-
 public class TestCaseExecutionReport {
 
     private final boolean success;

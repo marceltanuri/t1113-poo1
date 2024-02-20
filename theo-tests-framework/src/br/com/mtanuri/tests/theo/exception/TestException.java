@@ -1,4 +1,4 @@
-package aula5.strategy.tests.core.exception;
+package exception;
 
 public class TestException extends Exception{
 

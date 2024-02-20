@@ -1,6 +1,4 @@
-package aula5.strategy.tests.core;
-
-import aula5.strategy.tests.core.exception.TestException;
+import exception.TestException;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

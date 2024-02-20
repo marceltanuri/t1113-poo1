@@ -1,5 +1,3 @@
-package aula5.strategy.tests.core;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -8,12 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestsExecutor {
-    private static final String PACKAGE_NAME = "aula5.strategy.tests"; // Nome do seu pacote
 
     private static final List<TestCaseExecutionReport> testCaseExecutionReports = new ArrayList<>();
 
-    public static void main(String[] args) {
-        List<Class<?>> classes = findClassesInPackage();
+    public static void execute(String testsPackage) {
+        List<Class<?>> classes = findClassesInPackage(testsPackage);
 
         for (Class<?> clazz : classes) {
             if (isRunnableTestClass(clazz)) {
@@ -37,15 +34,16 @@ public class TestsExecutor {
         System.out.printf("Testes com falha: %d (%.2f%%)\n", failureCount, failurePercentage);
     }
 
-    private static List<Class<?>> findClassesInPackage() {
+    private static List<Class<?>> findClassesInPackage(String packageName) {
         List<Class<?>> classes = new ArrayList<>();
-        String path = PACKAGE_NAME.replace('.', File.separatorChar);
+        // Nome do seu pacote
+        String path = packageName.replace('.', File.separatorChar);
         try {
             String[] classpathEntries = System.getProperty("java.class.path").split(File.pathSeparator);
             for (String classpathEntry : classpathEntries) {
                 File file = new File(classpathEntry, path);
                 if (file.exists()) {
-                    classes.addAll(findClassesInDirectory(file, PACKAGE_NAME));
+                    classes.addAll(findClassesInDirectory(file, packageName));
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
