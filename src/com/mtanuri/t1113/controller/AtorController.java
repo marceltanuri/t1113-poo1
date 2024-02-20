@@ -1,59 +1,61 @@
 package com.mtanuri.t1113.controller;
 
-import java.util.List;
-
-import com.mtanuri.t1113.repository.AtoresRepository;
+import com.mtanuri.t1113.repository.AtorRepository;
 import com.mtanuri.t1113.model.ator.Ator;
 import com.mtanuri.t1113.model.filme.Filme;
 
 public class AtorController {
-	
-	private AtoresRepository atoresRepository;
-	
-	public AtorController(AtoresRepository repository) {
+
+	private AtorRepository atoresRepository;
+
+	public AtorController(AtorRepository repository) {
 		this.atoresRepository = repository;
 	}
-	
-    public void executar(String command, Ator ator){
-        if("inserir".equals(command)){
-            atoresRepository.inserir(ator);
-      }
-  }
 
-	/*
-	 * public void executar(String command, AlunoDTO dto){
-	 * 
-	 * if("inserir".equals(command)){ Aluno aluno =
-	 * alunoRepository.inserir(dto.toAluno());
-	 * System.out.println("Aluno inserido com sucesso: " + aluno); }
-	 * 
-	 * if("alterar".equals(command)){ // implementar depois }
-	 * 
-	 * if("excluir".equals(command)){ // implementar depois }
-	 * 
-	 * }
-	 */
-	
-	public Ator inserir(Ator ator) {
-		return atoresRepository.inserir(ator);
-	}
-	
-	public Ator atualizar(int id, String nome, List<Filme> filmes) {
-        return atoresRepository.atualizar(id, nome, filmes);
-	}
-	
-	public boolean excluir(int id) {
-		try {
-			atoresRepository.excluir(id);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+	public void executar(String command, Ator ator) {
+		if ("inserir".equals(command)) {
+			atoresRepository.inserir(ator);
 		}
 	}
 
-	public List<Ator> pesquisarPorNome(String nomeOuParteDoNome) {
-		return atoresRepository.pesquisarPorNome(nomeOuParteDoNome);
+	public void executar(String command, int idAtor, Filme filme){
+		if("adicionarFilme".equals(command)){
+			atoresRepository.adicionarFilme(idAtor, filme);
+		}
+	}
+
+	public void executar(String command, int idAtor, int idFilme){
+		if("removerFilme".equals(command)){
+			atoresRepository.removerFilme(idAtor, idFilme);
+		}
+	}
+
+	public void executar(String command, int id, String nome) {
+		if("renomear".equals(command)) {
+			atoresRepository.renomear(id, nome);
+		}
+	}
+
+	public void executar(String command, int id) {
+		if("excluir".equals(command)) {
+			try {
+				atoresRepository.excluir(id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void executar(String command) {
+		if("listarTodos".equals(command)) {
+			atoresRepository.listarTodos().forEach((System.out::println));
+		}
+	}
+
+	public void executar(String command, String nomeOuParteDoNome) {
+		if("pesquisarPorNome".equals(command)) {
+			atoresRepository.pesquisarPorNome(nomeOuParteDoNome).forEach(System.out::println);
+		}
 	}
 
 }

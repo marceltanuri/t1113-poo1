@@ -1,8 +1,8 @@
 package com.mtanuri.t1113.model.diretor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-
 import com.mtanuri.t1113.model.filme.Filme;
 
 public class Diretor {
@@ -11,14 +11,24 @@ public class Diretor {
 	private String nome;
 	private LocalDate dataNascimento;
 
-	private List<Filme> filmes;
+	private List<Filme> filmes = new ArrayList<Filme>();
 	
     @Override
     public String toString() {
-        return "Diretor{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                '}';
+        return "Director{" +
+                "id: " + id + ";" +
+        		"\n" + "name: " + nome + ";" +
+                "\n" + "directed movies: " + filmesToString() +
+                "}\n";
+    }
+    
+    public String filmesToString() {
+    	StringBuilder filmesString = new StringBuilder();
+    	for (Filme filme : filmes) {
+    		filmesString.append(filme.getNome() + ",");
+    	}
+    	filmesString.deleteCharAt(filmesString.length()-1);
+    	return filmesString.toString();
     }
 
 	public int getId() {

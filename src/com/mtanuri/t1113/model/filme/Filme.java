@@ -1,8 +1,8 @@
 package com.mtanuri.t1113.model.filme;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-
 import com.mtanuri.t1113.model.ator.Ator;
 import com.mtanuri.t1113.model.diretor.Diretor;
 
@@ -14,18 +14,39 @@ public class Filme {
     private double orcamento;
     private String descricao;
 
-    private List<Ator> atores;
+    private List<Ator> atores = new ArrayList<Ator>();
 
-    private List<Diretor> diretores;
+    private List<Diretor> diretores = new ArrayList<Diretor>();
     
     @Override
     public String toString() {
-        return "Filme{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                '}';
+        return "Movie{" +
+                "id: " + id + ";" +
+        		"\n" + "title: " + nome + ";" +
+                "\n" + "description: " + descricao + ";" +
+        		"\n" + "starring: " + atoresToString() + ";" +
+                "\n" + "directed by: " + diretoresToString() +
+                "}\n";
     }
 
+    public String atoresToString() {
+    	StringBuilder atoresString = new StringBuilder();
+    	for (Ator ator : atores) {
+    		atoresString.append(ator.getNome() + ",");
+    	}
+    	atoresString.deleteCharAt(atoresString.length()-1);
+    	return atoresString.toString();
+    }
+    
+    public String diretoresToString() {
+    	StringBuilder diretoresString = new StringBuilder();
+    	for (Diretor diretor : diretores) {
+    		diretoresString.append(diretor.getNome() + ",");
+    	}
+    	diretoresString.deleteCharAt(diretoresString.length()-1);
+    	return diretoresString.toString();
+    }
+    
 	public int getId() {
 		return id;
 	}

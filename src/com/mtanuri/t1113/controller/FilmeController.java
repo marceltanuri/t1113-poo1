@@ -1,38 +1,81 @@
 package com.mtanuri.t1113.controller;
 
-import java.util.List;
-
-import com.mtanuri.t1113.repository.FilmesRepository;
+import com.mtanuri.t1113.repository.FilmeRepository;
+import com.mtanuri.t1113.model.ator.Ator;
+import com.mtanuri.t1113.model.diretor.Diretor;
 import com.mtanuri.t1113.model.filme.Filme;
 
 public class FilmeController {
 
-	private FilmesRepository filmesRepository;
-	
-	public FilmeController(FilmesRepository repository) {
+	private FilmeRepository filmesRepository;
+
+	public FilmeController(FilmeRepository repository) {
 		this.filmesRepository = repository;
 	}
-	
-	public Filme inserir(Filme filme) {
-		return filmesRepository.inserir(filme);
-	}
-	
-	public Filme atualizar(int id, String nome, String descricao) {
-        return filmesRepository.atualizar(id, nome, descricao);
-	}
-	
-	public boolean excluir(int id) {
-		try {
-			filmesRepository.excluir(id);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+
+	public void executar(String command, Filme filme) {
+		if ("inserir".equals(command)) {
+			filmesRepository.inserir(filme);
 		}
 	}
 
-	public List<Filme> pesquisarPorNome(String nomeOuParteDoNome) {
-		return filmesRepository.pesquisarPorNome(nomeOuParteDoNome);
+	public void executar(String command, int idFilme, Ator ator) {
+		if("adicionarAtor".equals(command)){
+			filmesRepository.adicionarAtor(idFilme, ator);
+			return;
+		}
 	}
-	
+
+	public void executar(String command, int idFilme, Diretor diretor) {
+		if("adicionarDiretor".equals(command)){
+			filmesRepository.adicionarDiretor(idFilme, diretor);
+			return;
+		}
+	}
+
+	public void executar(String command, int idFilme, int idAtorOuDiretor){
+		if("removerAtor".equals(command)){
+			filmesRepository.removerAtor(idFilme, idAtorOuDiretor);
+			return;
+		}
+
+		if("removerDiretor".equals(command)){
+			filmesRepository.removerDiretor(idFilme, idAtorOuDiretor);
+		}
+
+	}
+
+	public void executar(String command, int id, String nomeOuDescricao) {
+		if("renomear".equals(command)) {
+			filmesRepository.renomear(id, nomeOuDescricao);
+			return;
+		}
+
+		if("atualizarDescricao".equals(command)) {
+			filmesRepository.atualizarDescricao(id, nomeOuDescricao);
+		}
+	}
+
+	public void executar(String command, int id) {
+		if("excluir".equals(command)) {
+			try {
+				filmesRepository.excluir(id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void executar(String command) {
+		if("listarTodos".equals(command)) {
+			filmesRepository.listarTodos().forEach((System.out::println));
+		}
+	}
+
+	public void executar(String command, String nomeOuParteDoNome) {
+		if("pesquisarPorNome".equals(command)) {
+			filmesRepository.pesquisarPorNome(nomeOuParteDoNome).forEach(System.out::println);
+		}
+	}
+
 }
