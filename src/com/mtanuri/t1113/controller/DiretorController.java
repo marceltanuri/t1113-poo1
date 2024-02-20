@@ -2,16 +2,16 @@ package com.mtanuri.t1113.controller;
 
 import java.util.List;
 
-import com.mtanuri.t1113.repository.impl.DiretoresRepositoryInMemoryImpl;
+import com.mtanuri.t1113.repository.DiretoresRepository;
 import com.mtanuri.t1113.model.diretor.Diretor;
 import com.mtanuri.t1113.model.filme.Filme;
 
 public class DiretorController {
 
-	private DiretoresRepositoryInMemoryImpl diretoresRepository;
+	private DiretoresRepository diretoresRepository;
 	
-	public DiretorController() {
-		this.diretoresRepository = new DiretoresRepositoryInMemoryImpl();
+	public DiretorController(DiretoresRepository repository) {
+		this.diretoresRepository = repository;
 	}
 	
 	public Diretor inserir(Diretor diretor) {

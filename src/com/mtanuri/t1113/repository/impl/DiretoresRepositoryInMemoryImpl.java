@@ -26,7 +26,7 @@ public class DiretoresRepositoryInMemoryImpl implements DiretoresRepository {
 
 	@Override
 	public Diretor atualizar(int id, String nome, List<Filme> filmes) {
-	   	Diretor diretor = diretores.stream().filter(f -> f.getId() == id).findFirst().get();
+	   	Diretor diretor = diretores.stream().filter(d -> d.getId() == id).findFirst().get();
         diretor.setNome(nome);
         diretor.setFilmes(filmes);
         return diretor;
@@ -34,13 +34,13 @@ public class DiretoresRepositoryInMemoryImpl implements DiretoresRepository {
 
 	@Override
 	public void excluir(int id) {
-		diretores.removeIf(f -> f.getId() == id);
+		diretores.removeIf(d -> d.getId() == id);
 		
 	}
 
 	@Override
 	public List<Diretor> pesquisarPorNome(String nomeOuParteDoNome) {
-		return diretores.stream().filter(f->f.getNome().contains(nomeOuParteDoNome)).collect(Collectors.toList());
+		return diretores.stream().filter(d->d.getNome().contains(nomeOuParteDoNome)).collect(Collectors.toList());
 	}
 
 }

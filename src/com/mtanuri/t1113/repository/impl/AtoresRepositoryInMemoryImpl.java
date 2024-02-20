@@ -26,7 +26,7 @@ public class AtoresRepositoryInMemoryImpl implements AtoresRepository {
 
 	@Override
 	public Ator atualizar(int id, String nome, List<Filme> filmes) {
-    	Ator ator = atores.stream().filter(f -> f.getId() == id).findFirst().get();
+    	Ator ator = atores.stream().filter(a -> a.getId() == id).findFirst().get();
         ator.setNome(nome);
         ator.setFilmes(filmes);
         return ator;
@@ -34,13 +34,13 @@ public class AtoresRepositoryInMemoryImpl implements AtoresRepository {
 
 	@Override
 	public void excluir(int id) {
-		atores.removeIf(f -> f.getId() == id);
+		atores.removeIf(a -> a.getId() == id);
 		
 	}
 
 	@Override
 	public List<Ator> pesquisarPorNome(String nomeOuParteDoNome) {
-		return atores.stream().filter(f->f.getNome().contains(nomeOuParteDoNome)).collect(Collectors.toList());
+		return atores.stream().filter(a->a.getNome().contains(nomeOuParteDoNome)).collect(Collectors.toList());
 	}
 
 }

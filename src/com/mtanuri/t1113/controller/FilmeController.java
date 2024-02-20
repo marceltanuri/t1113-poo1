@@ -2,15 +2,15 @@ package com.mtanuri.t1113.controller;
 
 import java.util.List;
 
-import com.mtanuri.t1113.repository.impl.FilmesRepositoryInMemoryImpl;
+import com.mtanuri.t1113.repository.FilmesRepository;
 import com.mtanuri.t1113.model.filme.Filme;
 
 public class FilmeController {
 
-	private FilmesRepositoryInMemoryImpl filmesRepository;
+	private FilmesRepository filmesRepository;
 	
-	public FilmeController() {
-		this.filmesRepository = new FilmesRepositoryInMemoryImpl();
+	public FilmeController(FilmesRepository repository) {
+		this.filmesRepository = repository;
 	}
 	
 	public Filme inserir(Filme filme) {

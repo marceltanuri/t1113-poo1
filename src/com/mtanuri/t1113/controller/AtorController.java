@@ -2,17 +2,37 @@ package com.mtanuri.t1113.controller;
 
 import java.util.List;
 
-import com.mtanuri.t1113.repository.impl.AtoresRepositoryInMemoryImpl;
+import com.mtanuri.t1113.repository.AtoresRepository;
 import com.mtanuri.t1113.model.ator.Ator;
 import com.mtanuri.t1113.model.filme.Filme;
 
 public class AtorController {
 	
-	private AtoresRepositoryInMemoryImpl atoresRepository;
+	private AtoresRepository atoresRepository;
 	
-	public AtorController() {
-		this.atoresRepository = new AtoresRepositoryInMemoryImpl();
+	public AtorController(AtoresRepository repository) {
+		this.atoresRepository = repository;
 	}
+	
+    public void executar(String command, Ator ator){
+        if("inserir".equals(command)){
+            atoresRepository.inserir(ator);
+      }
+  }
+
+	/*
+	 * public void executar(String command, AlunoDTO dto){
+	 * 
+	 * if("inserir".equals(command)){ Aluno aluno =
+	 * alunoRepository.inserir(dto.toAluno());
+	 * System.out.println("Aluno inserido com sucesso: " + aluno); }
+	 * 
+	 * if("alterar".equals(command)){ // implementar depois }
+	 * 
+	 * if("excluir".equals(command)){ // implementar depois }
+	 * 
+	 * }
+	 */
 	
 	public Ator inserir(Ator ator) {
 		return atoresRepository.inserir(ator);
