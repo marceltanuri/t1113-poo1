@@ -49,8 +49,13 @@ public class AtorRepositoryInMemoryImpl implements AtorRepository {
 
 	@Override
 	public void excluir(int id) {
-		atores.removeIf(a -> a.getId() == id);
-
+		Ator ator = atores.stream().filter(a -> a.getId() == id).findFirst().get();
+		
+		for (Filme filme : ator.getFilmes()) {
+				filme.getAtores().remove(ator);
+		}
+		
+		atores.remove(ator);
 	}
 
 	@Override

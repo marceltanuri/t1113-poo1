@@ -74,8 +74,17 @@ public class FilmeRepositoryInMemoryImpl implements FilmeRepository {
 
 	@Override
 	public void excluir(int id) {
-		filmes.removeIf(f -> f.getId() == id);
-
+		Filme filme = filmes.stream().filter(f -> f.getId() == id).findFirst().get();
+		
+		for (Diretor diretor : filme.getDiretores()) {
+				diretor.getFilmes().remove(filme);
+		}
+		
+		for (Ator ator : filme.getAtores()) {
+				ator.getFilmes().remove(filme);
+		}
+		
+		filmes.remove(filme);
 	}
 
 	@Override

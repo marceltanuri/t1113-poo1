@@ -49,8 +49,13 @@ public class DiretorRepositoryInMemoryImpl implements DiretorRepository {
 
 	@Override
 	public void excluir(int id) {
-		diretores.removeIf(a -> a.getId() == id);
-
+		Diretor diretor = diretores.stream().filter(d -> d.getId() == id).findFirst().get();
+		
+		for (Filme filme : diretor.getFilmes()) {
+				filme.getDiretores().remove(diretor);
+		}
+		
+		diretores.remove(diretor);
 	}
 
 	@Override

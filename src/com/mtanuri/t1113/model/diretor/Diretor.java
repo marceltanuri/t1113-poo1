@@ -3,6 +3,7 @@ package com.mtanuri.t1113.model.diretor;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 import com.mtanuri.t1113.model.filme.Filme;
 
 public class Diretor {
@@ -23,11 +24,10 @@ public class Diretor {
     }
     
     public String filmesToString() {
-    	StringBuilder filmesString = new StringBuilder();
+       	StringJoiner filmesString = new StringJoiner(", ");
     	for (Filme filme : filmes) {
-    		filmesString.append(filme.getNome() + ",");
+    		filmesString.add(filme.getNome());
     	}
-    	filmesString.deleteCharAt(filmesString.length()-1);
     	return filmesString.toString();
     }
 
