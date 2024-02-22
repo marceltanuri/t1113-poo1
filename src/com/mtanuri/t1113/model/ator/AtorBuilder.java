@@ -25,6 +25,7 @@ public class AtorBuilder {
 	}
 
 	public Ator build(){
+		ator.setId();
 		return ator;
 	}
 

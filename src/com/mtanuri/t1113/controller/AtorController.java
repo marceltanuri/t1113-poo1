@@ -1,6 +1,7 @@
 package com.mtanuri.t1113.controller;
 
 import com.mtanuri.t1113.repository.AtorRepository;
+import com.mtanuri.t1113.operacao.OperacaoAtorDiretor;
 import com.mtanuri.t1113.model.ator.Ator;
 import com.mtanuri.t1113.model.filme.Filme;
 
@@ -12,32 +13,33 @@ public class AtorController {
 		this.atoresRepository = repository;
 	}
 
-	public void executar(String command, Ator ator) {
-		if ("inserir".equals(command)) {
+	public void executar(OperacaoAtorDiretor operacao, Ator ator) {
+		if (operacao == OperacaoAtorDiretor.INSERIR) {
 			atoresRepository.inserir(ator);
 		}
+		
 	}
 
-	public void executar(String command, int idAtor, Filme filme){
-		if("adicionarFilme".equals(command)){
+	public void executar(OperacaoAtorDiretor operacao, int idAtor, Filme filme){
+		if(operacao == OperacaoAtorDiretor.ADICIONAR_FILME){
 			atoresRepository.adicionarFilme(idAtor, filme);
 		}
 	}
 
-	public void executar(String command, int idAtor, int idFilme){
-		if("removerFilme".equals(command)){
+	public void executar(OperacaoAtorDiretor operacao, int idAtor, int idFilme){
+		if(operacao == OperacaoAtorDiretor.REMOVER_FILME){
 			atoresRepository.removerFilme(idAtor, idFilme);
 		}
 	}
 
-	public void executar(String command, int id, String nome) {
-		if("renomear".equals(command)) {
+	public void executar(OperacaoAtorDiretor operacao, int id, String nome) {
+		if(operacao == OperacaoAtorDiretor.RENOMEAR) {
 			atoresRepository.renomear(id, nome);
 		}
 	}
 
-	public void executar(String command, int id) {
-		if("excluir".equals(command)) {
+	public void executar(OperacaoAtorDiretor operacao, int id) {
+		if(operacao == OperacaoAtorDiretor.EXCLUIR) {
 			try {
 				atoresRepository.excluir(id);
 			} catch (Exception e) {
@@ -46,14 +48,14 @@ public class AtorController {
 		}
 	}
 
-	public void executar(String command) {
-		if("listarTodos".equals(command)) {
+	public void executar(OperacaoAtorDiretor operacao) {
+		if(operacao == OperacaoAtorDiretor.LISTAR_TODOS) {
 			atoresRepository.listarTodos().forEach((System.out::println));
 		}
 	}
 
-	public void executar(String command, String nomeOuParteDoNome) {
-		if("pesquisarPorNome".equals(command)) {
+	public void executar(OperacaoAtorDiretor operacao, String nomeOuParteDoNome) {
+		if(operacao == OperacaoAtorDiretor.PESQUISAR_POR_NOME) {
 			atoresRepository.pesquisarPorNome(nomeOuParteDoNome).forEach(System.out::println);
 		}
 	}

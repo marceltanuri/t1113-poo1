@@ -41,6 +41,7 @@ public class FilmeBuilder {
 	}
 
 	public Filme build(){
+		filme.setId();
 		return filme;
 	}
 

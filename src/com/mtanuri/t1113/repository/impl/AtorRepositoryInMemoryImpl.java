@@ -10,7 +10,6 @@ import com.mtanuri.t1113.repository.AtorRepository;
 public class AtorRepositoryInMemoryImpl implements AtorRepository {
 
 	private List<Ator> atores = new ArrayList<Ator>();
-	private static int contador = 0;
 
 	public AtorRepositoryInMemoryImpl() {
 
@@ -18,7 +17,6 @@ public class AtorRepositoryInMemoryImpl implements AtorRepository {
 
 	@Override
 	public Ator inserir(Ator ator) {
-		ator.setId(++contador);
 		atores.add(ator);
 		return ator;
 	}

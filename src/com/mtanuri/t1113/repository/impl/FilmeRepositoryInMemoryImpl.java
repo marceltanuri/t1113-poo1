@@ -11,7 +11,6 @@ import com.mtanuri.t1113.repository.FilmeRepository;
 public class FilmeRepositoryInMemoryImpl implements FilmeRepository {
 
 	private List<Filme> filmes = new ArrayList<Filme>();
-	private static int contador = 0;
 
 	public FilmeRepositoryInMemoryImpl(){
 
@@ -19,7 +18,6 @@ public class FilmeRepositoryInMemoryImpl implements FilmeRepository {
 
 	@Override
 	public Filme inserir(Filme filme) {
-		filme.setId(++contador);
 		filmes.add(filme);
 		return filme;
 	}

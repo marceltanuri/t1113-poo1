@@ -2,6 +2,7 @@ package com.mtanuri.t1113.app;
 
 
 import java.util.Scanner;
+
 import com.mtanuri.t1113.controller.AtorController;
 import com.mtanuri.t1113.controller.DiretorController;
 import com.mtanuri.t1113.controller.FilmeController;
@@ -11,6 +12,8 @@ import com.mtanuri.t1113.model.diretor.Diretor;
 import com.mtanuri.t1113.model.diretor.DiretorBuilder;
 import com.mtanuri.t1113.model.filme.Filme;
 import com.mtanuri.t1113.model.filme.FilmeBuilder;
+import com.mtanuri.t1113.operacao.OperacaoAtorDiretor;
+import com.mtanuri.t1113.operacao.OperacaoFilme;
 import com.mtanuri.t1113.repository.impl.AtorRepositoryInMemoryImpl;
 import com.mtanuri.t1113.repository.impl.DiretorRepositoryInMemoryImpl;
 import com.mtanuri.t1113.repository.impl.FilmeRepositoryInMemoryImpl;
@@ -28,35 +31,28 @@ public class Main {
 
 		//Builders
 		Filme filme = new FilmeBuilder().comNome("Batman").comDescricao("Descricao").build();
-		Filme filme2 = new FilmeBuilder().comNome("Spiderman").comDescricao("Descricao").build();
 		Ator ator = new AtorBuilder().comNome("Joao").build();
 		Diretor diretor = new DiretorBuilder().comNome("Maria").build();
 
 		//FilmeController
 		FilmeController filmeController = new FilmeController(new FilmeRepositoryInMemoryImpl());
-		filmeController.executar("inserir", filme);
-		filmeController.executar("inserir", filme2);
+		filmeController.executar(OperacaoFilme.INSERIR, filme);
 
-		filmeController.executar("adicionarAtor", filme.getId(), ator);
-		filmeController.executar("adicionarDiretor", filme.getId(), diretor);
-		
-		filmeController.executar("adicionarAtor", filme2.getId(), ator);
-		filmeController.executar("adicionarDiretor", filme2.getId(), diretor);
-		
+		filmeController.executar(OperacaoFilme.ADICIONAR_ATOR, filme.getId(), ator);
+		filmeController.executar(OperacaoFilme.ADICIONAR_DIRETOR, filme.getId(), diretor);
+
 		//AtorController
 		AtorController atorController = new AtorController(new AtorRepositoryInMemoryImpl());
-		atorController.executar("inserir", ator);
+		atorController.executar(OperacaoAtorDiretor.INSERIR, ator);
 		
 		//DiretorController
 		DiretorController diretorController = new DiretorController(new DiretorRepositoryInMemoryImpl());
-		diretorController.executar("inserir", diretor);
+		diretorController.executar(OperacaoAtorDiretor.INSERIR, diretor);
 		
-		//Se um ator for excluído não dá mais erro, só não aparece mais o nome dele
-		//atorController.executar("excluir", 1);
 		//Print
-		atorController.executar("listarTodos");
-		filmeController.executar("listarTodos");
-		diretorController.executar("listarTodos");
+		atorController.executar(OperacaoAtorDiretor.LISTAR_TODOS);
+		filmeController.executar(OperacaoFilme.LISTAR_TODOS);
+		diretorController.executar(OperacaoAtorDiretor.LISTAR_TODOS);
 		
 		//sc.close();
 

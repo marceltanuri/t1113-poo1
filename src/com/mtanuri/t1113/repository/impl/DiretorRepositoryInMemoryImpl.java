@@ -10,7 +10,6 @@ import com.mtanuri.t1113.repository.DiretorRepository;
 public class DiretorRepositoryInMemoryImpl implements DiretorRepository {
 
 	private List<Diretor> diretores = new ArrayList<Diretor>();
-	private static int contador = 0;
 
 	public DiretorRepositoryInMemoryImpl() {
 
@@ -18,7 +17,6 @@ public class DiretorRepositoryInMemoryImpl implements DiretorRepository {
 
 	@Override
 	public Diretor inserir(Diretor Diretor) {
-		Diretor.setId(++contador);
 		diretores.add(Diretor);
 		return Diretor;
 	}
