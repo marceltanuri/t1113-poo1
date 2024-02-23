@@ -12,9 +12,16 @@ public class FilmeRepositoryInMemoryImpl implements FilmeRepository {
 
 	private List<Filme> filmes = new ArrayList<Filme>();
 
-	public FilmeRepositoryInMemoryImpl(){
+	private static final FilmeRepositoryInMemoryImpl instance = new FilmeRepositoryInMemoryImpl();
+
+	private FilmeRepositoryInMemoryImpl() {
 
 	}
+
+	public static FilmeRepositoryInMemoryImpl getInstance(){
+		return instance;
+	}
+
 
 	@Override
 	public Filme inserir(Filme filme) {

@@ -11,8 +11,14 @@ public class DiretorRepositoryInMemoryImpl implements DiretorRepository {
 
 	private List<Diretor> diretores = new ArrayList<Diretor>();
 
-	public DiretorRepositoryInMemoryImpl() {
+	private static final DiretorRepositoryInMemoryImpl instance = new DiretorRepositoryInMemoryImpl();
 
+	private DiretorRepositoryInMemoryImpl() {
+
+	}
+
+	public static DiretorRepositoryInMemoryImpl getInstance(){
+		return instance;
 	}
 
 	@Override
