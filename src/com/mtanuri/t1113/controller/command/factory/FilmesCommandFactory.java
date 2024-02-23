@@ -5,6 +5,8 @@ import com.mtanuri.t1113.controller.command.impl.filme.*;
 import com.mtanuri.t1113.controller.command.opcoes.OperacoesFilme;
 import com.mtanuri.t1113.repository.FilmeRepository;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class FilmesCommandFactory {
@@ -13,9 +15,13 @@ public class FilmesCommandFactory {
 
     private static FilmesCommandFactory instance;
 
+    private final Map<OperacoesFilme, Command> commandMap;
+
+
 
     private FilmesCommandFactory(FilmeRepository repository) {
         this.repository = repository;
+        this.commandMap = initializeCommands();
     }
 
     public static FilmesCommandFactory getInstance(FilmeRepository repository){
@@ -25,42 +31,23 @@ public class FilmesCommandFactory {
         return instance;
     }
 
-    public Optional<Command> getCommand(OperacoesFilme operacoesFilme){
+    private Map<OperacoesFilme, Command> initializeCommands() {
+        Map<OperacoesFilme, Command> map = new HashMap<>();
+        map.put(OperacoesFilme.INSERIR, new NovoFilme(repository));
+        map.put(OperacoesFilme.EXCLUIR, new ExcluirFilme(repository));
+        map.put(OperacoesFilme.RENOMEAR, new Renomear(repository));
+        map.put(OperacoesFilme.ATUALIZAR_DESCRICAO, new AtualizarDescricao(repository));
+        map.put(OperacoesFilme.LISTAR_TODOS, new ListarTodosFilmes(repository));
+        map.put(OperacoesFilme.PESQUISAR_POR_NOME, new PesquisarPorNome(repository));
+        map.put(OperacoesFilme.ADICIONAR_ATOR, new AdicionarAtor(repository));
+        map.put(OperacoesFilme.REMOVER_ATOR, new RemoveAtor(repository));
+        map.put(OperacoesFilme.ADICIONAR_DIRETOR, new AdicionaDiretor(repository));
+        map.put(OperacoesFilme.REMOVER_DIRETOR, new RemoveDiretor(repository));
+        return map;
+    }
 
-        Command command = null;
-
-        switch (operacoesFilme){
-            case INSERIR -> {
-                command = new NovoFilme(repository);
-            }
-            case EXCLUIR -> {
-                command = new ExcluirFilme(repository);
-            }
-            case RENOMEAR -> {
-                command = new Renomear(repository);
-            }
-            case ATUALIZAR_DESCRICAO -> {
-                command = new AtualizarDescricao(repository);
-            }
-            case LISTAR_TODOS -> {
-                command = new ListarTodosFilmes(repository);
-            }
-            case PESQUISAR_POR_NOME -> {
-                command = new PesquisarPorNome(repository);
-            }
-            case ADICIONAR_ATOR -> {
-                command = new AdicionarAtor(repository);
-            }
-            case REMOVER_ATOR -> {
-                command = new RemoveAtor(repository);
-            }
-            case ADICIONAR_DIRETOR -> {
-                command = new AdicionaDiretor(repository);
-            }
-            case REMOVER_DIRETOR -> {
-                command = new RemoveDiretor(repository);
-            }
-        }
-       return Optional.ofNullable(command) ;
+    public Optional<Command> getCommand(OperacoesFilme operacoesFilme) {
+        Command command = commandMap.get(operacoesFilme);
+        return Optional.ofNullable(command);
     }
 }
