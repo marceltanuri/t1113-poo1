@@ -16,8 +16,7 @@ public class FilmeController {
 	}
 
 	public void executar(OperacoesFilme operacao) {
-		Command command = FilmesCommandFactory.getInstance(filmesRepository).getCommand(operacao);
-		command.executar(null);
+		this.executar(operacao, null);
 	}
 	public void executar(OperacoesFilme operacao, Map<String, Object> params) {
 		Command command = FilmesCommandFactory.getInstance(filmesRepository).getCommand(operacao);
