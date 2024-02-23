@@ -11,8 +11,14 @@ public class AtorRepositoryInMemoryImpl implements AtorRepository {
 
 	private List<Ator> atores = new ArrayList<Ator>();
 
-	public AtorRepositoryInMemoryImpl() {
+	private static final AtorRepositoryInMemoryImpl instance = new AtorRepositoryInMemoryImpl();
 
+	private AtorRepositoryInMemoryImpl() {
+
+	}
+
+	public static AtorRepositoryInMemoryImpl getInstance(){
+		return instance;
 	}
 
 	@Override
