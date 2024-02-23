@@ -1,8 +1,11 @@
-package com.mtanuri.t1113.controller.command;
+package com.mtanuri.t1113.controller.command.factory;
 
+import com.mtanuri.t1113.controller.command.Command;
 import com.mtanuri.t1113.controller.command.impl.filme.*;
 import com.mtanuri.t1113.controller.command.opcoes.OperacoesFilme;
 import com.mtanuri.t1113.repository.FilmeRepository;
+
+import java.util.Optional;
 
 public class FilmesCommandFactory {
 
@@ -22,7 +25,7 @@ public class FilmesCommandFactory {
         return instance;
     }
 
-    public Command getCommand(OperacoesFilme operacoesFilme){
+    public Optional<Command> getCommand(OperacoesFilme operacoesFilme){
 
         Command command = null;
 
@@ -58,6 +61,6 @@ public class FilmesCommandFactory {
                 command = new RemoveDiretor(repository);
             }
         }
-       return command ;
+       return Optional.ofNullable(command) ;
     }
 }

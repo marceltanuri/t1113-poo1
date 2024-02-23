@@ -1,6 +1,5 @@
 package com.mtanuri.t1113.controller.command.impl.filme;
 
-import com.mtanuri.t1113.controller.command.FilmeCommand;
 import com.mtanuri.t1113.model.filme.Filme;
 import com.mtanuri.t1113.repository.FilmeRepository;
 

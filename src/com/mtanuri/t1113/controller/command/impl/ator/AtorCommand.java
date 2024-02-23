@@ -1,5 +1,6 @@
-package com.mtanuri.t1113.controller.command;
+package com.mtanuri.t1113.controller.command.impl.ator;
 
+import com.mtanuri.t1113.controller.command.Command;
 import com.mtanuri.t1113.repository.AtorRepository;
 import com.mtanuri.t1113.repository.FilmeRepository;
 
@@ -9,7 +10,7 @@ public abstract class AtorCommand implements Command {
 
     protected AtorRepository repository;
 
-    public AtorCommand(AtorRepository repository) {
+    protected AtorCommand(AtorRepository repository) {
         this.repository = repository;
     }
 
