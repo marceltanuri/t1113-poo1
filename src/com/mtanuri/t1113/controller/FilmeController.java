@@ -2,6 +2,7 @@ package com.mtanuri.t1113.controller;
 
 import com.mtanuri.t1113.controller.command.Command;
 import com.mtanuri.t1113.controller.command.factory.FilmesCommandFactory;
+import com.mtanuri.t1113.repository.DiretorRepository;
 import com.mtanuri.t1113.repository.FilmeRepository;
 import com.mtanuri.t1113.controller.command.opcoes.OperacoesFilme;
 
@@ -12,8 +13,17 @@ public class FilmeController {
 
 	private FilmeRepository filmesRepository;
 
-	public FilmeController(FilmeRepository repository) {
+	private FilmeController(FilmeRepository repository) {
 		this.filmesRepository = repository;
+	}
+
+	private static FilmeController instance ;
+
+	public static FilmeController getInstance(FilmeRepository repository){
+		if(instance==null){
+			instance = new FilmeController(repository);
+		}
+		return instance;
 	}
 
 	public void executar(OperacoesFilme operacao) {

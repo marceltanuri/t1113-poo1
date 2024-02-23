@@ -36,7 +36,7 @@ public class Main {
 		Diretor diretor = new DiretorBuilder().comNome("Maria").build();
 
 		//FilmeController
-		FilmeController filmeController = new FilmeController(FilmeRepositoryInMemoryImpl.getInstance());
+		FilmeController filmeController =  FilmeController.getInstance(FilmeRepositoryInMemoryImpl.getInstance());
 		Map<String, Object> params = new HashMap<>();
 		params.put("filme", filme);
 		filmeController.executar(OperacoesFilme.INSERIR, params);
@@ -50,11 +50,11 @@ public class Main {
 		filmeController.executar(OperacoesFilme.ADICIONAR_DIRETOR, params);
 
 		//AtorController
-		AtorController atorController = new AtorController(AtorRepositoryInMemoryImpl.getInstance());
+		AtorController atorController = AtorController.getInstance(AtorRepositoryInMemoryImpl.getInstance());
 		atorController.executar(OperacoesDiretor.INSERIR, ator);
 
 		//DiretorController
-		DiretorController diretorController = new DiretorController(DiretorRepositoryInMemoryImpl.getInstance());
+		DiretorController diretorController = DiretorController.getInstance(DiretorRepositoryInMemoryImpl.getInstance());
 		diretorController.executar(OperacoesDiretor.INSERIR, diretor);
 		
 		//Print

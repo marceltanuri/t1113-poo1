@@ -1,5 +1,6 @@
 package com.mtanuri.t1113.controller;
 
+import com.mtanuri.t1113.repository.AtorRepository;
 import com.mtanuri.t1113.repository.DiretorRepository;
 import com.mtanuri.t1113.model.diretor.Diretor;
 import com.mtanuri.t1113.model.filme.Filme;
@@ -9,8 +10,17 @@ public class DiretorController {
 
 	private DiretorRepository diretoresRepository;
 
-	public DiretorController(DiretorRepository repository) {
+	private DiretorController(DiretorRepository repository) {
 		this.diretoresRepository = repository;
+	}
+
+	private static DiretorController instance ;
+
+	public static DiretorController getInstance(DiretorRepository repository){
+		if(instance==null){
+			instance = new DiretorController(repository);
+		}
+		return instance;
 	}
 
 	public void executar(OperacoesDiretor operacao, Diretor diretor) {

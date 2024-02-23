@@ -9,8 +9,17 @@ public class AtorController {
 
 	private AtorRepository atoresRepository;
 
-	public AtorController(AtorRepository repository) {
+	private AtorController(AtorRepository repository) {
 		this.atoresRepository = repository;
+	}
+
+	private static AtorController instance ;
+
+	public static AtorController getInstance(AtorRepository repository){
+		if(instance==null){
+			instance = new AtorController(repository);
+		}
+		return instance;
 	}
 
 	public void executar(OperacoesDiretor operacao, Ator ator) {
